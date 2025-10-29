@@ -1,10 +1,17 @@
-echo "node_modules/
-test-results/
+# Node modules
+node_modules/
+
+# Playwright reports
 reports/
+test-results/
 playwright-report/
 trace/
+
+# Media files
 *.webm
 *.mp4
 *.zip
+
+# Environment and local config
 .env
-" > .gitignore
+.DS_Store
