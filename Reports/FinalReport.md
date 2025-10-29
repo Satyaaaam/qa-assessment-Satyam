@@ -9,7 +9,7 @@
 | **Application Under Test** | TaskMaster - GoTrade Platform – Multi-Exchange Trading & Account Management System |
 | **Tester** | Satyam Raina |
 | **Operating System** | MacOs |
-| **Testing Framework** | Playwright with TypeScript (POM) |
+| **Testing Framework** | Playwright with TypeScript |
 | **Browsers Tested** | Safari Browser, Chrome Browser, Chromium Browser |
 | **Test URL** | https://test1.gotrade.goquant.io |
 
@@ -17,24 +17,30 @@
 
 ## Executive Summary
 
-This Quality Assurance (QA) assessment was conducted on the GoTrade Platform(https://test1.gotrade.goquant.io) to evaluate its overall functional integrity, user interface stability, and backend consistency across critical trading and account management modules. The assessment focused on end-to-end workflows — from account setup and trade execution to reporting and analytics — to ensure the platform delivers a reliable and seamless trading experience.
-Testing was performed across multiple modules including GoTrade, GoOps, GoRisk, Admin, and Post Trade Analytics, covering both positive user flows and error-handling scenarios. The process combined manual exploratory testing with automated test case execution, validating UI responsiveness, data synchronization, and backend integration under realistic user conditions.
+This Quality Assurance (QA) assessment was conducted on the GoTrade Platform(https://test1.gotrade.goquant.io) to evaluate its **overall functional integrity, user interface stability, and backend consistency** across critical trading and account management modules. The assessment focused on end-to-end workflows — from account setup and trade execution to reporting and analytics — to ensure the platform delivers a reliable and seamless trading experience.
+
+Testing was performed across multiple modules including **GoTrade, GoOps, GoRisk, Admin, and Post Trade Analytics**, covering both positive user flows and error-handling scenarios. The process combined **manual exploratory testing with automated test case execution**, validating UI responsiveness, data synchronization, and backend integration under realistic user conditions.
+
 Across the testing cycle, **14 high and critical-severity issues** were identified. The majority of these defects were concentrated in the **Admin, GoOps, and GoRisk modules**, indicating areas where API response handling and data rendering require optimization. Core functionalities — such as order placement, working order visibility, and account linkage — were operational and met baseline expectations, though several modules exhibited intermittent data lags, misaligned UI components, and tooltip or modal inconsistencies.
-From a platform stability perspective, the GoTrade environment demonstrates approximately **70% overall stability**, suitable for extended internal testing but not yet production-ready. The key concerns include delayed API responses, inconsistent data refreshes, and limited error-handling feedback for failed backend operations. User interface responsiveness remains acceptable, but several visual and behavioral inconsistencies impact the overall user experience.
+
+From a platform stability perspective, the GoTrade environment demonstrates approximately **70% overall stability**, suitable for extended internal testing but not yet production-ready. The key concerns include **delayed API responses, inconsistent data refreshes, and limited error-handling feedback** for failed backend operations. User interface responsiveness remains acceptable, but several visual and behavioral inconsistencies impact the overall user experience.
+
 In its current state, the platform exhibits a strong structural foundation and a clear potential for high scalability once identified defects are resolved. The QA results suggest that the next development cycle should emphasize **backend optimization, frontend UI standardization, and data consistency validation** across interconnected modules. Additional regression and performance testing are recommended following defect resolutions to verify improved stability and responsiveness.
-In conclusion, GoTrade’s functional core is stable, with key workflows performing as intended. However, refinements in data handling, UI alignment, and error management are necessary to achieve a production-grade release. With targeted fixes and enhanced QA coverage, the platform can reach a high reliability threshold suitable for enterprise deployment and user scaling in its next iteration.
+
+In conclusion, GoTrade’s functional core is stable, with key workflows performing as intended. However, **refinements in data handling, UI alignment, and error management are necessary** to achieve a production-grade release. With targeted fixes and enhanced QA coverage, the platform can reach a high reliability threshold suitable for enterprise deployment and user scaling in its next iteration.
 
 ---
 
 ## Testing Methodology
 
-The QA testing for the GoTrade Platform was carried out using a **hybrid testing strategy**, combining manual exploratory testing with Playwright-based automated test execution. This approach ensured thorough coverage of both functional workflows and non-functional quality attributes, such as interface consistency, data integrity, and system responsiveness.
+The QA testing for the GoTrade Platform was carried out using a **hybrid testing strategy**, combining **manual exploratory testing with Playwright-based automated test execution**. This approach ensured thorough coverage of both functional workflows and non-functional quality attributes, such as interface consistency, data integrity, and system responsiveness.
+
 The objective was to validate the platform’s end-to-end functionality, simulate real-world user interactions, and assess the stability of backend integrations and frontend components under typical and edge-case scenarios.
 
 ### Scope of Testing
 
 The testing effort covered all critical workflows across the GoTrade ecosystem, including:
-* **Functional Validation** – Verification of key trading and account management flows such such as login, account addition, modification, deletion, and data synchronization.
+* **Functional Validation** – Verification of key trading and account management flows such as login, account addition, modification, deletion, and data synchronization.
 * **UI/UX Verification** – Detailed assessment of modal behaviors, dynamic data rendering, tooltips, alignment consistency, and error message handling.
 * **Integration and API Behavior** – Observation of real-time data updates, synchronization between frontend and backend, and handling of API latency or failure scenarios.
 * **Browser Compatibility** – Functional consistency and rendering verification across Google Chrome and Mozilla Firefox on macOS.
@@ -85,7 +91,7 @@ The hybrid methodology allowed for comprehensive coverage of both visible UI beh
 | Account Management | Add Account (OKX, USD-M, Coin-M) | Connect account with valid keys | Integration |
 | Admin Controls | Admin Page | Delete Account, Modify Account | Functional |
 | Trading | GoTrade | Place Buy/Sell Orders, OrderBook, Charts | Functional / UI |
-| Analytics | GoDark, Post Trade Analysis | Navigation & Data Load Validation | Validation |
+| Analytics | GoDark, Post Trade Analysis | Navigation & Data Load | Validation |
 | Operational Pages | GoRisk, GoOps, GoSettle | Data loading, Export, Metric validation | Functional / API |
 | UI Validations | Modals, Tooltips, Tables | Overlap, Pagination, ReadMore | UI/UX |
 
@@ -98,21 +104,21 @@ Below is a comprehensive list of all observed defects and inconsistencies during
 
 | Bug ID | Module | Description | Severity | Priority | Environment |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **AC-001** | Account → Add Account Modal | **“Show Secret Key” Button Overlaps Input Text**. When entering a long key (30+ characters), the eye button overlaps the text. | Low | Medium | Chrome on macOS |
-| **OB-001** | GoTrade → Order Book | **Consolidated Toggle Causes Order Book to Go Blank**. Enabling the toggle clears the order book instead of merging data. | **High** | **High** | Chrome on macOS |
-| **OB-002** | GoTrade → Order Table | **Incorrect Pagination Display in Order Table**. When no data is available, pagination footer shows inconsistent values (“1 of 0”). | Low | Medium | Chrome on macOS |
-| **AD-001** | Account → Admin Page | **Incorrect “Cannot Communicate with Exchange” Status Until Refresh**. Displays ❌ until manual page refresh. | Medium | Medium | Chrome on macOS |
-| **AD-002** | Admin Page → Modify Account | **Modify Account Fails with Backend Error**. Triggers a Python backend exception: “delete credentials() takes from 1 to 2 positional arguments but 3 were given.” | Medium | Medium | Chrome on macOS |
-| **GR-001** | Account → Go Risk Page | **“Go Risk” Page Stuck on Loading**. Page remains indefinitely stuck on “Loading Leverage Data…”. | **High** | Medium | Chrome on macOS |
-| **GR-002** | Go Risk → Risk Sub-Metrics | **Tooltip Closes on “Read More” Click**. Clicking “Read More” within the tooltip immediately closes it. | Medium | Medium | Chrome on macOS |
-| **GOPS-001** | GoOps → Billing Report | **Export as CSV/PDF Keeps Loading**. Export buttons spin indefinitely without generating any file. | Medium | Medium | Chrome on macOS |
-| **GOPS-002** | GoOps → Total Assets | **Total Assets Buttons Non-Functional**. Buttons under the three-dot menu (View Detail, Transfer, Open On) are unresponsive. | **High** | Medium | Chrome on macOS |
-| **GOPS-003** | GoOps → Metrics | **Metrics Section Shows Blank Values**. All core metric fields (Unrealised PnL, Margin Ratio, etc.) display blank instead of showing numerical data. | **High** | **High** | Chrome on macOS |
-| **GOPS-004** | GoOps → Metrics | **Tooltip Closes on “Read More” Click**. Clicking “Read More” inside the metrics tooltip causes the tooltip to close. | Medium | Medium | Chrome on macOS |
-| **GS-001** | Go Settle Page | **“New Transfer” Action Fails**. Attempting a new transfer returns a “Transfer Failed” error even with valid data. | Medium | Medium | Chrome on macOS |
-| **GOPS-005** | GoOps → Reconciliation Calendar | **Duplicate Dates in Reconciliation Calendar**. Certain dates (e.g., 30, 31) appear twice; selecting one picks a wrong month’s date. | Medium | Medium | Chrome on macOS |
-| **PTA-001** | Trading → Post Trade Analytics | **Assets Section Blank in Post Trade Analytics**. The Assets section is completely blank despite valid trading data being available. | **High** | **High** | Chrome on macOS |
-| **GM-001** | Market → Go Market | **Unable to Navigate Away from Go Market Page**. After visiting the page, navigation to other pages becomes unresponsive (user trapped). | **High** | **High** | Chrome on macOS |
+| **AC-001** | Account → Add Account Modal | “Show Secret Key” Button **Overlaps Input Text** (for 30+ chars key). | Low | Medium | Chrome on macOS |
+| **OB-001** | GoTrade → Order Book | **Consolidated Toggle Causes Order Book to Go Blank** instead of merging data. | **High** | **High** | Chrome on macOS |
+| **OB-002** | GoTrade → Order Table | **Incorrect Pagination Display** in Order Table (“1 of 0”) when no data is available. | Low | Medium | Chrome on macOS |
+| **AD-001** | Account → Admin Page | Incorrect **“Cannot Communicate with Exchange” Status Until Refresh**. | Medium | Medium | Chrome on macOS |
+| **AD-002** | Admin Page → Modify Account | **Modify Account Fails with Backend Error**: Python exception on save. | Medium | Medium | Chrome on macOS |
+| **GR-001** | Account → Go Risk Page | **“Go Risk” Page Stuck on Loading** indefinitely ("Loading Leverage Data…"). | **High** | Medium | Chrome on macOS |
+| **GR-002** | Go Risk → Risk Sub-Metrics | **Tooltip Closes on “Read More” Click** instead of expanding. | Medium | Medium | Chrome on macOS |
+| **GOPS-001** | GoOps → Billing Report | **Export as CSV/PDF Keeps Loading** (loader spins endlessly). | Medium | Medium | Chrome on macOS |
+| **GOPS-002** | GoOps → Total Assets | **Total Assets Buttons Non-Functional** (View Detail, Transfer, Open On). | **High** | Medium | Chrome on macOS |
+| **GOPS-003** | GoOps → Metrics | **Metrics Section Shows Blank Values** (Unrealised PnL, Margin Ratio, etc.). | **High** | **High** | Chrome on macOS |
+| **GOPS-004** | GoOps → Metrics | **Tooltip Closes on “Read More” Click** instead of showing extended details. | Medium | Medium | Chrome on macOS |
+| **GS-001** | Go Settle Page | **“New Transfer” Action Fails** (returns “Transfer Failed” error). | Medium | Medium | Chrome on macOS |
+| **GOPS-005** | GoOps → Reconciliation Calendar | **Duplicate Dates in Reconciliation Calendar** leading to incorrect selection. | Medium | Medium | Chrome on macOS |
+| **PTA-001** | Trading → Post Trade Analytics | **Assets Section Blank** despite valid trading data. | **High** | **High** | Chrome on macOS |
+| **GM-001** | Market → Go Market | **Unable to Navigate Away from Go Market Page** (navigation freezes). | **High** | **High** | Chrome on macOS |
 
 ---
 
@@ -161,8 +167,8 @@ Testing for this assessment aimed to validate all core user-facing functionaliti
     * Post Trade Analytics (Data rendering, report generation)
     * GoSettle (Transfer functionality)
 * **Coverage Summary:**
-    * Functional Coverage: ~85% of primary workflows tested.
-    * Automation Coverage: ~60% (Login, Add/Delete Account, Orders, History).
+    * **Functional Coverage: ~85%** of primary workflows tested.
+    * **Automation Coverage: ~60%** (Login, Add/Delete Account, Orders, History).
     * UI Validation: All critical screens tested on Chrome and Firefox.
 * **Non-Covered Areas:**
     * Real-time data streaming validation for live orders.
@@ -216,3 +222,4 @@ Overall platform readiness is estimated at **~75% for a controlled beta rollout*
 * Automated regression testing is integrated into the CI/CD pipeline.
 
 With these improvements, the GoTrade Platform can achieve production-level readiness within one QA cycle, ensuring a smoother and more reliable user experience across all major modules.
+
