@@ -1,0 +1,10 @@
+echo "node_modules/
+test-results/
+reports/
+playwright-report/
+trace/
+*.webm
+*.mp4
+*.zip
+.env
+" > .gitignore
